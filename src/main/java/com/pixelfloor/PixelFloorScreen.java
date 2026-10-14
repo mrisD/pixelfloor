@@ -88,6 +88,8 @@ public class PixelFloorScreen extends Screen {
     private int rowH;
     private int contentBottom;
     private boolean compactUi;
+    /** 空间极紧（例如 854x480 窗口配自动 GUI 缩放 = 逻辑 427x240）时的最窄档。 */
+    private boolean terseUi;
 
     // 参数
     private int blockWidth = Config.blockWidth;
@@ -98,6 +100,8 @@ public class PixelFloorScreen extends Screen {
     private int colorMode = Config.colorMode;
     private boolean levelUnder = Config.levelUnder;
     private int groundY;
+    /** 铺设速度：每 tick 发多少条指令。值越大铺得越快，但太大会给服务端和帧率压力。 */
+    private int commandsPerTick = Config.commandsPerTick;
 
     private EditBox widthBox;
     private EditBox heightBox;
@@ -108,6 +112,7 @@ public class PixelFloorScreen extends Screen {
     private Button nextButton;
     private Button autoHeightButton;
     private Button colorModeButton;
+    private Button speedButton;
     private Button cropButton;
     private Button enhanceButton;
     private Button levelButton;
@@ -139,27 +144,45 @@ public class PixelFloorScreen extends Screen {
         int budget = panelBottom - panelTop;
         int[][] presets = {{20, 4}, {18, 3}, {16, 2}};
         compactUi = false;
+        terseUi = false;
+
+        // 每档实测需要的行数（含各行类型差异）：
+        //   完整档 11 行：路径/对话框/翻页 + 宽高 + 高度自动/算法/速度 + 增强/地面/裁剪/调色板 + 铺设
+        //   紧凑档  9 行：路径/对话框/翻页 + 宽高 + 高度自动/算法/速度 + 增强/地面 + 铺设
+        //   精简档  5 行：路径 + 高度自动 + 算法 + 速度 + 铺设（省掉对话框、翻页、尺寸输入、所有附加项）
+        int[][] rowPlan = {{3, 1, 4, 1, 2}, {3, 1, 3, 1, 1}, {1, 0, 3, 0, 1}};
 
         for (int i = 0; i < presets.length; i++) {
             widgetH = presets[i][0];
             gap = presets[i][1];
             rowH = widgetH + gap;
             compactUi = i == presets.length - 1;
-            // 行：路径 / 对话框 / 翻页 / 宽高 / 高度自动 / 算法 / 增强 / 地面 / 配色 / 铺设
-            int rows = compactUi ? 6 : 9;
-            int bottom = panelTop + (18 + gap + 2) + rowH * 3
-                + (18 + gap + 2) + rowH * rows + 24;
+            int[] plan = rowPlan[i];
+            int bottom = panelTop
+                + 18 + rowH * plan[0]          // 路径 + 对话框 + 翻页
+                + 18 + rowH * plan[1]          // 宽高输入框
+                + rowH * plan[2]               // 开关类
+                + rowH * plan[3]               // 附加项
+                + 22;                          // 铺设按钮
             if (bottom - panelTop <= budget) {
                 contentBottom = bottom;
+                terseUi = false;
                 return;
             }
         }
 
+        // 连紧凑档都放不下：进入精简档。这通常意味着 GUI 缩放偏大
+        // （854x480 自动缩放会得到 427x240 的逻辑空间，纵向只有 214 像素）。
         compactUi = true;
+        terseUi = true;
         widgetH = 16;
         gap = 2;
         rowH = widgetH + gap;
-        contentBottom = panelTop + (18 + gap + 2) + rowH * 3 + (18 + gap + 2) + rowH * 6 + 24;
+        contentBottom = panelTop + 18 + rowH * 5 + 8;
+        if (contentBottom > panelBottom) {
+            // 极端情况兜底，保证按钮不会跑到屏幕外
+            contentBottom = panelBottom;
+        }
     }
 
     @Override
@@ -204,12 +227,14 @@ public class PixelFloorScreen extends Screen {
         int w = widgetW;
         int y = panelTop;
 
-        pathBox = new EditBox(font, x, y, Math.max(50, w - 54), 18,
+        // 精简档里空间只够放路径输入框本身，所以"载入"按钮并排、宽度压窄
+        int pathBoxW = terseUi ? Math.max(40, w - 34) : Math.max(50, w - 54);
+        pathBox = new EditBox(font, x, y, pathBoxW, 18,
             Component.literal("图片路径"));
         // 注意顺序：EditBox 的 maxLength 默认只有 32 字符，而图片路径经常更长。
         // 必须在 setResponder 之前放宽，否则 responder 收到的是被截断的值。
         pathBox.setMaxLength(400);
-        pathBox.setHint(Component.literal("也可粘贴图片路径"));
+        pathBox.setHint(Component.literal(terseUi ? "粘贴图片路径" : "也可粘贴图片路径"));
         pathBox.setResponder(s -> {
             Path p = ImageFinder.parseUserPath(s);
             if (p != null && !p.equals(selectedFile)) {
@@ -218,6 +243,12 @@ public class PixelFloorScreen extends Screen {
         });
         if (selectedFile != null) {
             pathBox.setValue(selectedFile.toAbsolutePath().toString());
+        }
+        if (terseUi) {
+            // 精简档没有单独的系统对话框按钮行，把它挂成路径框的提示，
+            // 中键/悬停即可知道还有这条备用路径
+            pathBox.setTooltip(Tooltip.create(Component.literal(
+                "直接粘贴图片完整路径，回车即载入。\n左栏目录按钮可直接点选图片。")));
         }
         addRenderableWidget(pathBox);
 
@@ -228,60 +259,70 @@ public class PixelFloorScreen extends Screen {
             } else {
                 loadImage(p, true);
             }
-        }).bounds(x + Math.max(50, w - 54) + 4, y, 50, 18).build();
+        }).bounds(x + pathBoxW + 4, y, terseUi ? 30 : 50, 18).build();
         addRenderableWidget(loadPathButton);
         y += 18 + gap + 2;
 
-        browseButton = Button.builder(
-            Component.literal("系统文件对话框（可能不可用）"), b -> openFileDialog()
-        ).bounds(x, y, w, widgetH).build();
-        addRenderableWidget(browseButton);
-        y += rowH + 2;
+        if (!terseUi) {
+            browseButton = Button.builder(
+                Component.literal("系统文件对话框（可能不可用）"), b -> openFileDialog()
+            ).bounds(x, y, w, widgetH).build();
+            addRenderableWidget(browseButton);
+            y += rowH + 2;
 
-        int arrowW = Math.max(18, Math.min(24, w / 4));
-        prevButton = Button.builder(Component.literal("◀"), b -> stepSelection(-1))
-            .bounds(x, y, arrowW, widgetH).build();
-        nextButton = Button.builder(Component.literal("▶"), b -> stepSelection(1))
-            .bounds(x + w - arrowW, y, arrowW, widgetH).build();
-        addRenderableWidget(prevButton);
-        addRenderableWidget(nextButton);
-        y += rowH + 2;
+            int arrowW = Math.max(18, Math.min(24, w / 4));
+            prevButton = Button.builder(Component.literal("◀"), b -> stepSelection(-1))
+                .bounds(x, y, arrowW, widgetH).build();
+            nextButton = Button.builder(Component.literal("▶"), b -> stepSelection(1))
+                .bounds(x + w - arrowW, y, arrowW, widgetH).build();
+            addRenderableWidget(prevButton);
+            addRenderableWidget(nextButton);
+            y += rowH + 2;
+        }
 
-        int boxGap = 6;
-        int halfW = (w - boxGap) / 2;
-        widthBox = new EditBox(font, x, y, halfW, 18, Component.literal("宽度"));
-        widthBox.setValue(String.valueOf(blockWidth));
-        widthBox.setResponder(s -> {
-            Integer v = parseInt(s);
-            if (v != null && v >= 8 && v <= 2048) {
-                blockWidth = v;
-                scheduleConvert();
-            }
-        });
-        addRenderableWidget(widthBox);
+        // 尺寸输入框：精简档放不下，改用上次保存的宽度（下面的速度/算法仍可调）
+        if (!terseUi) {
+            int boxGap = 6;
+            int halfW = (w - boxGap) / 2;
+            widthBox = new EditBox(font, x, y, halfW, 18, Component.literal("宽度"));
+            widthBox.setValue(String.valueOf(blockWidth));
+            widthBox.setResponder(s -> {
+                Integer v = parseInt(s);
+                if (v != null && v >= 8 && v <= 2048) {
+                    blockWidth = v;
+                    scheduleConvert();
+                }
+            });
+            addRenderableWidget(widthBox);
 
-        heightBox = new EditBox(font, x + halfW + boxGap, y, halfW, 18, Component.literal("高度"));
-        heightBox.setValue(String.valueOf(blockHeight));
-        heightBox.setResponder(s -> {
-            Integer v = parseInt(s);
-            if (v != null && v >= 8 && v <= 2048) {
-                blockHeight = v;
-                scheduleConvert();
-            }
-        });
-        addRenderableWidget(heightBox);
-        y += 18 + gap + 2;
+            heightBox = new EditBox(font, x + halfW + boxGap, y, halfW, 18,
+                Component.literal("高度"));
+            heightBox.setValue(String.valueOf(blockHeight));
+            heightBox.setResponder(s -> {
+                Integer v = parseInt(s);
+                if (v != null && v >= 8 && v <= 2048) {
+                    blockHeight = v;
+                    scheduleConvert();
+                }
+            });
+            addRenderableWidget(heightBox);
+            y += 18 + gap + 2;
+        }
 
         autoHeightButton = Button.builder(autoHeightLabel(), b -> {
             autoHeight = !autoHeight;
             b.setMessage(autoHeightLabel());
-            heightBox.setEditable(!autoHeight);
-            heightBox.setVisible(!autoHeight);
+            if (heightBox != null) {
+                heightBox.setEditable(!autoHeight);
+                heightBox.setVisible(!autoHeight);
+            }
             scheduleConvert();
         }).bounds(x, y, w, widgetH).build();
         addRenderableWidget(autoHeightButton);
-        heightBox.setEditable(!autoHeight);
-        heightBox.setVisible(!autoHeight);
+        if (heightBox != null) {
+            heightBox.setEditable(!autoHeight);
+            heightBox.setVisible(!autoHeight);
+        }
         y += rowH;
 
         colorModeButton = Button.builder(Component.literal(modeLabel()), b -> {
@@ -291,6 +332,18 @@ public class PixelFloorScreen extends Screen {
             scheduleConvert();
         }).bounds(x, y, w, widgetH).build();
         addRenderableWidget(colorModeButton);
+        y += rowH;
+
+        // --- 铺设速度 ---
+        // 放在紧凑模式之外，因为它是"铺得动不动"的关键项，空间再紧也要留着
+        speedButton = Button.builder(speedLabel(), b -> {
+            commandsPerTick = nextSpeed(commandsPerTick);
+            FloorBuilder.setCommandsPerTick(commandsPerTick);
+            b.setMessage(speedLabel());
+            b.setTooltip(Tooltip.create(Component.literal(speedTooltip())));
+        }).bounds(x, y, w, widgetH).build();
+        speedButton.setTooltip(Tooltip.create(Component.literal(speedTooltip())));
+        addRenderableWidget(speedButton);
         y += rowH;
 
         if (!compactUi) {
@@ -330,6 +383,15 @@ public class PixelFloorScreen extends Screen {
         buildButton.active = result != null;
         contentBottom = y + 22;
 
+        if (terseUi) {
+            setStatus("界面空间很紧（当前 " + width + "x" + height + " 逻辑像素）："
+                + "已隐藏尺寸输入、翻页、系统对话框等项，"
+                + "画幅沿用上次保存的 " + blockWidth + " 宽。"
+                + "想看到完整界面，把窗口拉大或把 GUI 缩放调到 1。", false);
+        } else if (compactUi) {
+            setStatus("界面空间紧张：已隐藏裁剪与调色板按钮（用默认值）。"
+                + "想看到全部选项，把窗口拉大或把 GUI 缩放调小。", false);
+        }
         if (result == null && selectedFile != null) {
             scheduleConvert();
         }
@@ -638,16 +700,28 @@ public class PixelFloorScreen extends Screen {
                 leftX + boxW + boxGap + boxW / 2, boxTop + boxH / 2, TEXT_DIM);
         }
 
-        // 实时地面高度提示
+        // 实时地面高度与耗时预估
         if (result != null) {
             graphics.drawString(font,
                 Component.literal("将铺在 Y=" + groundY + "，占地 " + result.cols
                     + " x " + result.rows + " 格"),
                 leftX, boxTop + boxH + 2, ACCENT, false);
+            int cmds = estimateCommands(result);
+            double secs = cmds / (double) (commandsPerTick * 20);
+            String eta = secs >= 90
+                ? String.format("%.1f 分钟", secs / 60)
+                : String.format("%.0f 秒", secs);
+            graphics.drawString(font,
+                Component.literal("预计 " + cmds + " 条指令，约 " + eta
+                    + "（速度 " + commandsPerTick + " 条/tick）"),
+                leftX, boxTop + boxH + 2 + font.lineHeight, 0xFFFFD070, false);
         }
 
         // --- 图片列表 ---
-        int listY = boxTop + boxH + 14;
+        // 上方有"地面高度"和"预计耗时"两行文字（见上面 result != null 的分支），
+        // 所以起始位置要留出其中较高的一行，避免压字
+        int infoLines = result != null ? 2 : 0;
+        int listY = boxTop + boxH + 4 + Math.max(1, infoLines) * (font.lineHeight + 1);
         graphics.drawString(font,
             Component.literal("点名字即可选中（共 " + imageFiles.size() + " 张）"),
             leftX, listY, TEXT_DIM, false);
@@ -747,7 +821,7 @@ public class PixelFloorScreen extends Screen {
             return;
         }
         PixelFloor.applySettings(blockWidth, autoHeight, blockHeight, crop, enhance,
-            colorMode, Config.baseBlock, levelUnder, FloorBuilder.getCommandsPerTick());
+            colorMode, Config.baseBlock, levelUnder, commandsPerTick);
         Component msg = PixelFloor.startBuild(result);
         if (minecraft != null && minecraft.player != null) {
             minecraft.player.displayClientMessage(msg, false);
@@ -758,7 +832,7 @@ public class PixelFloorScreen extends Screen {
     @Override
     public void onClose() {
         PixelFloor.applySettings(blockWidth, autoHeight, blockHeight, crop, enhance,
-            colorMode, Config.baseBlock, levelUnder, FloorBuilder.getCommandsPerTick());
+            colorMode, Config.baseBlock, levelUnder, commandsPerTick);
         releaseTextures();
         super.onClose();
     }
@@ -792,6 +866,64 @@ public class PixelFloorScreen extends Screen {
 
     private String modeLabel() {
         return "算法：" + Palette.modeName(colorMode).split("（")[0];
+    }
+
+    /** 可选的速度档位：每 tick 发多少条指令。 */
+    private static final int[] SPEEDS = {6, 12, 24, 48};
+
+    private static int nextSpeed(int current) {
+        for (int i = 0; i < SPEEDS.length; i++) {
+            if (SPEEDS[i] == current) {
+                return SPEEDS[(i + 1) % SPEEDS.length];
+            }
+        }
+        return 12; // 配置里是个非标准值时的兜底
+    }
+
+    private Component speedLabel() {
+        return Component.literal("速度：" + commandsPerTick + " 条/tick"
+            + (commandsPerTick <= 6 ? "（稳）" : commandsPerTick >= 48 ? "（最快）" : ""));
+    }
+
+    private String speedTooltip() {
+        int perSec = commandsPerTick * 20;
+        StringBuilder sb = new StringBuilder();
+        sb.append("每 tick 发 ").append(commandsPerTick)
+          .append(" 条指令，约 ").append(perSec).append(" 条/秒\n");
+        if (result != null) {
+            int cmds = estimateCommands(result);
+            sb.append("当前画幅预计 ").append(cmds).append(" 条，")
+              .append(String.format("约 %.0f 秒", cmds / (double) perSec)).append('\n');
+        }
+        sb.append("\n档位：6 → 12 → 24 → 48\n");
+        sb.append("发太快的话，方块更新会挤在同一刻，容易卡顿；")
+          .append("联机时还可能被反作弊判定为刷屏。12~24 是速度与稳定的平衡点。");
+        return sb.toString();
+    }
+
+    /**
+     * 估算铺设需要多少条指令：只做行内同色合并，和 FloorBuilder 的口径一致。
+     *
+     * <p>垫底部分每行一条，所以还要加上行数。
+     */
+    private static int estimateCommands(FloorImage img) {
+        int cmds = 0;
+        for (int row = 0; row < img.rows; row++) {
+            int col = 0;
+            while (col < img.cols) {
+                int v = img.blockIndex[row][col];
+                int run = 1;
+                while (col + run < img.cols && img.blockIndex[row][col + run] == v) {
+                    run++;
+                }
+                cmds++;
+                col += run;
+            }
+        }
+        if (Config.levelUnder) {
+            cmds += img.rows;
+        }
+        return cmds;
     }
 
     private static Integer parseInt(String s) {
