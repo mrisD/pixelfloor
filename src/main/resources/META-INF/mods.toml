@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+clientSideOnly=true
+
+[[mods]]
+modId="pixelfloor"
+version="1.0.0"
+displayName="平面像素画 PixelFloor"
+authors="mrding"
+description='''
+把一张图片用 64 色方块（羊毛 / 混凝土 / 陶瓦 / 染色玻璃各 16 色）
+按人眼感知最接近的颜色，平铺在你的世界里。
+
+和"立成一面墙"的做法不同，这个模组把画面铺在地面上：高度只占 1 格，
+完全不受世界高度（384 格）限制，因此可以做到很高分辨率（256x256 甚至更大）。
+
+自动向下寻找地面，并在图片下方垫一层石头防止悬空。
+颜色匹配用 CIEDE2000 色差公式，比 RGB 距离准得多。
+
+用法：输入 /pixelfloor 打开界面，选图、调尺寸、点"开始铺设"。
+'''
+
+[[dependencies.pixelfloor]]
+    modId="forge"
+    mandatory=true
+    versionRange="[54,)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.pixelfloor]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.21.4,1.22)"
+    ordering="NONE"
+    side="CLIENT"

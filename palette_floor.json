@@ -1,0 +1,903 @@
+{
+  "_comment": "由 tools/fetch_floor_palette.py 生成；颜色取自游戏本体 jar 的方块贴图平均色",
+  "jar": "1.21.4-Forge_54.1.18.jar",
+  "count": 64,
+  "blocks": [
+    {
+      "kind": "wool",
+      "color": "white",
+      "block": "minecraft:white_wool",
+      "zh": "白色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        234,
+        236,
+        237
+      ],
+      "texture": "assets/minecraft/textures/block/white_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "orange",
+      "block": "minecraft:orange_wool",
+      "zh": "橙色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        241,
+        118,
+        20
+      ],
+      "texture": "assets/minecraft/textures/block/orange_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "magenta",
+      "block": "minecraft:magenta_wool",
+      "zh": "品红色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        190,
+        69,
+        180
+      ],
+      "texture": "assets/minecraft/textures/block/magenta_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "light_blue",
+      "block": "minecraft:light_blue_wool",
+      "zh": "淡蓝色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        58,
+        175,
+        217
+      ],
+      "texture": "assets/minecraft/textures/block/light_blue_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "yellow",
+      "block": "minecraft:yellow_wool",
+      "zh": "黄色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        249,
+        198,
+        40
+      ],
+      "texture": "assets/minecraft/textures/block/yellow_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "lime",
+      "block": "minecraft:lime_wool",
+      "zh": "黄绿色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        112,
+        185,
+        26
+      ],
+      "texture": "assets/minecraft/textures/block/lime_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "pink",
+      "block": "minecraft:pink_wool",
+      "zh": "粉红色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        238,
+        141,
+        172
+      ],
+      "texture": "assets/minecraft/textures/block/pink_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "gray",
+      "block": "minecraft:gray_wool",
+      "zh": "灰色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        63,
+        68,
+        72
+      ],
+      "texture": "assets/minecraft/textures/block/gray_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "light_gray",
+      "block": "minecraft:light_gray_wool",
+      "zh": "淡灰色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        142,
+        142,
+        135
+      ],
+      "texture": "assets/minecraft/textures/block/light_gray_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "cyan",
+      "block": "minecraft:cyan_wool",
+      "zh": "青色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        21,
+        138,
+        145
+      ],
+      "texture": "assets/minecraft/textures/block/cyan_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "purple",
+      "block": "minecraft:purple_wool",
+      "zh": "紫色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        122,
+        42,
+        173
+      ],
+      "texture": "assets/minecraft/textures/block/purple_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "blue",
+      "block": "minecraft:blue_wool",
+      "zh": "蓝色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        53,
+        57,
+        157
+      ],
+      "texture": "assets/minecraft/textures/block/blue_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "brown",
+      "block": "minecraft:brown_wool",
+      "zh": "棕色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        114,
+        72,
+        41
+      ],
+      "texture": "assets/minecraft/textures/block/brown_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "green",
+      "block": "minecraft:green_wool",
+      "zh": "绿色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        85,
+        110,
+        28
+      ],
+      "texture": "assets/minecraft/textures/block/green_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "red",
+      "block": "minecraft:red_wool",
+      "zh": "红色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        161,
+        39,
+        35
+      ],
+      "texture": "assets/minecraft/textures/block/red_wool.png"
+    },
+    {
+      "kind": "wool",
+      "color": "black",
+      "block": "minecraft:black_wool",
+      "zh": "黑色羊毛",
+      "zh_kind": "羊毛",
+      "translucent": false,
+      "rgb": [
+        21,
+        21,
+        26
+      ],
+      "texture": "assets/minecraft/textures/block/black_wool.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "white",
+      "block": "minecraft:white_concrete",
+      "zh": "白色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        207,
+        213,
+        214
+      ],
+      "texture": "assets/minecraft/textures/block/white_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "orange",
+      "block": "minecraft:orange_concrete",
+      "zh": "橙色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        224,
+        97,
+        1
+      ],
+      "texture": "assets/minecraft/textures/block/orange_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "magenta",
+      "block": "minecraft:magenta_concrete",
+      "zh": "品红色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        169,
+        48,
+        159
+      ],
+      "texture": "assets/minecraft/textures/block/magenta_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "light_blue",
+      "block": "minecraft:light_blue_concrete",
+      "zh": "淡蓝色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        36,
+        137,
+        199
+      ],
+      "texture": "assets/minecraft/textures/block/light_blue_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "yellow",
+      "block": "minecraft:yellow_concrete",
+      "zh": "黄色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        241,
+        175,
+        21
+      ],
+      "texture": "assets/minecraft/textures/block/yellow_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "lime",
+      "block": "minecraft:lime_concrete",
+      "zh": "黄绿色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        94,
+        169,
+        24
+      ],
+      "texture": "assets/minecraft/textures/block/lime_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "pink",
+      "block": "minecraft:pink_concrete",
+      "zh": "粉红色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        214,
+        101,
+        143
+      ],
+      "texture": "assets/minecraft/textures/block/pink_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "gray",
+      "block": "minecraft:gray_concrete",
+      "zh": "灰色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        55,
+        58,
+        62
+      ],
+      "texture": "assets/minecraft/textures/block/gray_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "light_gray",
+      "block": "minecraft:light_gray_concrete",
+      "zh": "淡灰色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        125,
+        125,
+        115
+      ],
+      "texture": "assets/minecraft/textures/block/light_gray_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "cyan",
+      "block": "minecraft:cyan_concrete",
+      "zh": "青色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        21,
+        119,
+        136
+      ],
+      "texture": "assets/minecraft/textures/block/cyan_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "purple",
+      "block": "minecraft:purple_concrete",
+      "zh": "紫色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        100,
+        32,
+        156
+      ],
+      "texture": "assets/minecraft/textures/block/purple_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "blue",
+      "block": "minecraft:blue_concrete",
+      "zh": "蓝色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        45,
+        47,
+        143
+      ],
+      "texture": "assets/minecraft/textures/block/blue_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "brown",
+      "block": "minecraft:brown_concrete",
+      "zh": "棕色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        96,
+        60,
+        32
+      ],
+      "texture": "assets/minecraft/textures/block/brown_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "green",
+      "block": "minecraft:green_concrete",
+      "zh": "绿色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        73,
+        91,
+        36
+      ],
+      "texture": "assets/minecraft/textures/block/green_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "red",
+      "block": "minecraft:red_concrete",
+      "zh": "红色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        142,
+        33,
+        33
+      ],
+      "texture": "assets/minecraft/textures/block/red_concrete.png"
+    },
+    {
+      "kind": "concrete",
+      "color": "black",
+      "block": "minecraft:black_concrete",
+      "zh": "黑色混凝土",
+      "zh_kind": "混凝土",
+      "translucent": false,
+      "rgb": [
+        8,
+        10,
+        15
+      ],
+      "texture": "assets/minecraft/textures/block/black_concrete.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "white",
+      "block": "minecraft:white_terracotta",
+      "zh": "白色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        210,
+        178,
+        161
+      ],
+      "texture": "assets/minecraft/textures/block/white_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "orange",
+      "block": "minecraft:orange_terracotta",
+      "zh": "橙色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        162,
+        84,
+        38
+      ],
+      "texture": "assets/minecraft/textures/block/orange_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "magenta",
+      "block": "minecraft:magenta_terracotta",
+      "zh": "品红色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        150,
+        88,
+        109
+      ],
+      "texture": "assets/minecraft/textures/block/magenta_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "light_blue",
+      "block": "minecraft:light_blue_terracotta",
+      "zh": "淡蓝色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        113,
+        109,
+        138
+      ],
+      "texture": "assets/minecraft/textures/block/light_blue_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "yellow",
+      "block": "minecraft:yellow_terracotta",
+      "zh": "黄色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        186,
+        133,
+        35
+      ],
+      "texture": "assets/minecraft/textures/block/yellow_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "lime",
+      "block": "minecraft:lime_terracotta",
+      "zh": "黄绿色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        104,
+        118,
+        53
+      ],
+      "texture": "assets/minecraft/textures/block/lime_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "pink",
+      "block": "minecraft:pink_terracotta",
+      "zh": "粉红色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        162,
+        78,
+        79
+      ],
+      "texture": "assets/minecraft/textures/block/pink_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "gray",
+      "block": "minecraft:gray_terracotta",
+      "zh": "灰色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        58,
+        42,
+        36
+      ],
+      "texture": "assets/minecraft/textures/block/gray_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "light_gray",
+      "block": "minecraft:light_gray_terracotta",
+      "zh": "淡灰色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        135,
+        107,
+        98
+      ],
+      "texture": "assets/minecraft/textures/block/light_gray_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "cyan",
+      "block": "minecraft:cyan_terracotta",
+      "zh": "青色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        87,
+        91,
+        91
+      ],
+      "texture": "assets/minecraft/textures/block/cyan_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "purple",
+      "block": "minecraft:purple_terracotta",
+      "zh": "紫色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        118,
+        70,
+        86
+      ],
+      "texture": "assets/minecraft/textures/block/purple_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "blue",
+      "block": "minecraft:blue_terracotta",
+      "zh": "蓝色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        74,
+        60,
+        91
+      ],
+      "texture": "assets/minecraft/textures/block/blue_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "brown",
+      "block": "minecraft:brown_terracotta",
+      "zh": "棕色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        77,
+        51,
+        36
+      ],
+      "texture": "assets/minecraft/textures/block/brown_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "green",
+      "block": "minecraft:green_terracotta",
+      "zh": "绿色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        76,
+        83,
+        42
+      ],
+      "texture": "assets/minecraft/textures/block/green_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "red",
+      "block": "minecraft:red_terracotta",
+      "zh": "红色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        143,
+        61,
+        47
+      ],
+      "texture": "assets/minecraft/textures/block/red_terracotta.png"
+    },
+    {
+      "kind": "terracotta",
+      "color": "black",
+      "block": "minecraft:black_terracotta",
+      "zh": "黑色陶瓦",
+      "zh_kind": "陶瓦",
+      "translucent": false,
+      "rgb": [
+        37,
+        23,
+        16
+      ],
+      "texture": "assets/minecraft/textures/block/black_terracotta.png"
+    },
+    {
+      "kind": "glass",
+      "color": "white",
+      "block": "minecraft:white_stained_glass",
+      "zh": "白色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "texture": "assets/minecraft/textures/block/white_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "orange",
+      "block": "minecraft:orange_stained_glass",
+      "zh": "橙色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        216,
+        127,
+        51
+      ],
+      "texture": "assets/minecraft/textures/block/orange_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "magenta",
+      "block": "minecraft:magenta_stained_glass",
+      "zh": "品红色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        178,
+        76,
+        216
+      ],
+      "texture": "assets/minecraft/textures/block/magenta_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "light_blue",
+      "block": "minecraft:light_blue_stained_glass",
+      "zh": "淡蓝色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        102,
+        153,
+        216
+      ],
+      "texture": "assets/minecraft/textures/block/light_blue_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "yellow",
+      "block": "minecraft:yellow_stained_glass",
+      "zh": "黄色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        229,
+        229,
+        51
+      ],
+      "texture": "assets/minecraft/textures/block/yellow_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "lime",
+      "block": "minecraft:lime_stained_glass",
+      "zh": "黄绿色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        127,
+        204,
+        25
+      ],
+      "texture": "assets/minecraft/textures/block/lime_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "pink",
+      "block": "minecraft:pink_stained_glass",
+      "zh": "粉红色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        242,
+        127,
+        165
+      ],
+      "texture": "assets/minecraft/textures/block/pink_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "gray",
+      "block": "minecraft:gray_stained_glass",
+      "zh": "灰色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        76,
+        76,
+        76
+      ],
+      "texture": "assets/minecraft/textures/block/gray_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "light_gray",
+      "block": "minecraft:light_gray_stained_glass",
+      "zh": "淡灰色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        153,
+        153,
+        153
+      ],
+      "texture": "assets/minecraft/textures/block/light_gray_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "cyan",
+      "block": "minecraft:cyan_stained_glass",
+      "zh": "青色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        76,
+        127,
+        153
+      ],
+      "texture": "assets/minecraft/textures/block/cyan_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "purple",
+      "block": "minecraft:purple_stained_glass",
+      "zh": "紫色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        127,
+        63,
+        178
+      ],
+      "texture": "assets/minecraft/textures/block/purple_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "blue",
+      "block": "minecraft:blue_stained_glass",
+      "zh": "蓝色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        51,
+        76,
+        178
+      ],
+      "texture": "assets/minecraft/textures/block/blue_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "brown",
+      "block": "minecraft:brown_stained_glass",
+      "zh": "棕色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        102,
+        76,
+        51
+      ],
+      "texture": "assets/minecraft/textures/block/brown_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "green",
+      "block": "minecraft:green_stained_glass",
+      "zh": "绿色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        102,
+        127,
+        51
+      ],
+      "texture": "assets/minecraft/textures/block/green_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "red",
+      "block": "minecraft:red_stained_glass",
+      "zh": "红色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        153,
+        51,
+        51
+      ],
+      "texture": "assets/minecraft/textures/block/red_stained_glass.png"
+    },
+    {
+      "kind": "glass",
+      "color": "black",
+      "block": "minecraft:black_stained_glass",
+      "zh": "黑色染色玻璃",
+      "zh_kind": "染色玻璃",
+      "translucent": true,
+      "rgb": [
+        25,
+        25,
+        25
+      ],
+      "texture": "assets/minecraft/textures/block/black_stained_glass.png"
+    }
+  ]
+}
